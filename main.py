@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect
+import os
 
 app = Flask(__name__)
 comments = []
@@ -60,3 +61,8 @@ def show_comments():
         <strong style="color:#6a1b9a;">{c['name']}</strong> ({c['email']})<br>{c['text']}</div>"""
     html += "</body></html>"
     return html
+
+# 👇 تنظیمات اجرای خودکار روی Render
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
