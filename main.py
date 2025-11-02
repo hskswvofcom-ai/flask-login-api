@@ -1,24 +1,11 @@
-import subprocess
-import sys
-import importlib
-
-# نصب خودکار Flask
-try:
-    importlib.import_module("flask")
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "flask"])
-
-# اجرای سایت داش اسمال
 from flask import Flask, request, redirect
-import threading
-import webbrowser
 
 app = Flask(__name__)
 comments = []
 
 @app.route('/')
 def index():
-    return """<!DOCTYPE html><html lang="fa"><head><meta charset="UTF-8"><title>گروه هنری داش حیدر</title>
+    return """<!DOCTYPE html><html lang="fa"><head><meta charset="UTF-8"><title>گروه هنری داش اسمال</title>
     <style>@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
     *{box-sizing:border-box;}body{margin:0;padding:0;font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;
     background:linear-gradient(to bottom right,#fff0f5,#e1bee7);color:#4e342e;display:flex;flex-direction:column;
@@ -35,7 +22,7 @@ def index():
     .instagram-links a:hover{text-decoration:underline;}
     footer{margin-top:40px;font-size:14px;color:#888;}
     </style></head><body>
-    <h1>گروه هنری داش حیدر</h1><h2>داش اسمال و داش حیدر</h2>
+    <h1>گروه هنری داش اسمال</h1><h2>داش اسمال و داش حیدر</h2>
     <div class="tagline">خلق لحظه‌های خاص با هنر ناب ایرانی، از دل تا قاب</div>
     <div class="numbers">📞 داش حیدر: 09018860133<br>📞 داش اسمال: 09151179499</div>
     <a class="btn" href="/comment">📝 ثبت نظر و انتقاد</a>
@@ -44,7 +31,7 @@ def index():
     <div class="instagram-links">📷 اینستاگرام: 
     <a href="https://instagram.com/dash_heydar_mashhad" target="_blank">داش حیدر</a> |
     <a href="https://instagram.com/dashsmal61" target="_blank">داش اسمال</a></div>
-    <footer>© 2025 تمامی حقوق محفوظ است | طراحی با عشق توسط داش حیدر</footer></body></html>"""
+    <footer>© 2025 تمامی حقوق محفوظ است | طراحی با عشق توسط داش اسمال</footer></body></html>"""
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
@@ -73,10 +60,3 @@ def show_comments():
         <strong style="color:#6a1b9a;">{c['name']}</strong> ({c['email']})<br>{c['text']}</div>"""
     html += "</body></html>"
     return html
-
-def open_browser():
-    webbrowser.open("http://127.0.0.1:5000")
-
-if __name__ == '__main__':
-    threading.Timer(1.5, open_browser).start()
-    app.run(debug=True)
